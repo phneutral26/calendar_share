@@ -1,0 +1,54 @@
+# Python-spezifische Dateien
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtuelle Umgebungen
+.venv/
+venv/
+ENV/
+
+# Google API Authentifizierung
+# Google API Authentifizierung und Zustandsdateien
+credentials.json
+token.pickle
+*.pickle
+processed_events.pkl
+config.json
+
+# Logs und temporäre Dateien
+*.log
+*.tmp
+kalender_log.txt
+
+# Systemspezifische Dateien
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE-spezifische Dateien
+.idea/
+.vscode/
+*.swp
+*.swo
