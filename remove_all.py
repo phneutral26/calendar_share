@@ -2,7 +2,6 @@ from googleapiclient.discovery import build
 import pickle
 import json
 
-# Load credentials
 with open('token.pickle', 'rb') as token_file:
     creds = pickle.load(token_file)
 
@@ -21,4 +20,4 @@ for event in events:
     print(f"Deleting event: {event['summary']}")
     service.events().delete(calendarId=target_calendar_id, eventId=event['id']).execute()
 
-print("Duplicates cleared.")
+print("Calendar cleared.")

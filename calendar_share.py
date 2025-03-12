@@ -15,7 +15,6 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
-# Wenn du das Skript änderst, musst du eventuell den Umfang der Berechtigungen ändern
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 def load_config():
@@ -23,20 +22,16 @@ def load_config():
         with open('config.json', 'r') as config_file:
             return json.load(config_file)
     except FileNotFoundError:
-        # Standardwerte oder leere Werte
         return {
             "source_calendar_id": "primary",
             "target_calendar_id": "your_target_calendar_id@group.calendar.google.com",
             "processed_events_file": "processed_events.pkl"
         }
 
-# Konfiguration laden
 config = load_config()
 
-# Kalender-IDs aus der Konfiguration verwenden
 SOURCE_CALENDAR_ID = config.get("source_calendar_id")
 TARGET_CALENDAR_ID = config.get("target_calendar_id")
-# Datei zum Speichern bereits übertragener Ereignisse
 PROCESSED_EVENTS_FILE = config.get("processed_events_file")
 
 def get_google_calendar_service():
@@ -75,20 +70,16 @@ def save_processed_events(processed_events):
         pickle.dump(processed_events, f)
 
 def main():
-    # Calendar Service erstellen
     service = get_google_calendar_service()
     
     # Anfangs- und Enddatum für das aktuelle Jahr festlegen
     now = datetime.datetime.now(datetime.timezone.utc)
-    # Ganzes Jahr: 1. Januar bis 31. Dezember, timezone-aware!
     start_of_year = datetime.datetime(now.year, 1, 1, tzinfo=datetime.timezone.utc).isoformat()
     end_of_year = datetime.datetime(now.year, 12, 31, 23, 59, 59, tzinfo=datetime.timezone.utc).isoformat()
 
     
-    # Bereits verarbeitete Ereignisse laden
     processed_events = load_processed_events()
     
-    # Ereignisse im Quellkalender abrufen, die "Phil" enthalten
     print(f"Suche nach Ereignissen mit 'Phil' im Kalender für das Jahr {now.year}...")
     events_result = service.events().list(
         calendarId=SOURCE_CALENDAR_ID,
@@ -104,7 +95,6 @@ def main():
         print('Keine Ereignisse mit "Phil" gefunden.')
         return
     
-    # Zähler für neu übertragene Ereignisse
     new_events_count = 0
     
     # Durch die Ereignisse iterieren und übertragen, wenn sie "Phil" enthalten
@@ -125,8 +115,6 @@ def main():
                 'end': event.get('end'),
                 'reminders': event.get('reminders', {})
             }
-            
-            # Erstellen des Ereignisses im Zielkalender
             created_event = service.events().insert(
                 calendarId=TARGET_CALENDAR_ID,
                 body=new_event
