@@ -7,3 +7,5 @@ $\rightarrow$  Fülle die `config.example.json` aus und entferne das `example` a
 Bei Gruppenkalendern musst du `@group.calendar.google.com` an die ID anhängen
 
 `remove_all.py` is used for clearing an entire calendar
+
+You will need to change the filter for selecting Events. Its currently set to my name.
