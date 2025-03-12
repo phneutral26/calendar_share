@@ -5,3 +5,5 @@
 $ \rightarrow $  Fülle die `config.example.json` aus und entferne das `example` aus dem Dateinamen.
 
 Bei Gruppenkalendern musst du `@group.calendar.google.com` an die ID anhängen
+
+`remove_all.py` is used for clearing an entire calendar
