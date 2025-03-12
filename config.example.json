@@ -1,5 +1,5 @@
 {
     "source_calendar_id": "primary",
-    "target_calendar_id": "your_target_calendar_id@group.calendar.google.com",
+    "target_calendar_id": "your_target_calendar_id",
     "processed_events_file": "processed_events.pkl"
 }
