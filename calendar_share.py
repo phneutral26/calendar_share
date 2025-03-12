@@ -79,9 +79,11 @@ def main():
     service = get_google_calendar_service()
     
     # Anfangs- und Enddatum für das aktuelle Jahr festlegen
-    now = datetime.datetime.utcnow()
-    start_of_year = datetime.datetime(now.year, 1, 1, 0, 0, 0).isoformat() + 'Z'
-    end_of_year = datetime.datetime(now.year, 12, 31, 23, 59, 59).isoformat() + 'Z'
+    now = datetime.datetime.now(datetime.timezone.utc)
+    # Ganzes Jahr: 1. Januar bis 31. Dezember, timezone-aware!
+    start_of_year = datetime.datetime(now.year, 1, 1, tzinfo=datetime.timezone.utc).isoformat()
+    end_of_year = datetime.datetime(now.year, 12, 31, 23, 59, 59, tzinfo=datetime.timezone.utc).isoformat()
+
     
     # Bereits verarbeitete Ereignisse laden
     processed_events = load_processed_events()
